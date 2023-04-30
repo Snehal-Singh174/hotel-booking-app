@@ -71,10 +71,21 @@ class $AssetsIconGen {
       ];
 }
 
+class $AssetsImageGen {
+  const $AssetsImageGen();
+
+  /// File path: assets/image/photo.png
+  AssetGenImage get photo => const AssetGenImage('assets/image/photo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [photo];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconGen icon = $AssetsIconGen();
+  static const $AssetsImageGen image = $AssetsImageGen();
 }
 
 class AssetGenImage {
