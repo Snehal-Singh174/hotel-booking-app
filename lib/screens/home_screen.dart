@@ -191,6 +191,7 @@ class HotelCard extends StatelessWidget {
               child: Image.asset(
                 hotel.thumbnailPath,
                 fit: BoxFit.cover,
+                height: 150,
               ),
             ),
           ),
