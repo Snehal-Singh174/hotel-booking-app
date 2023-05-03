@@ -74,11 +74,32 @@ class $AssetsIconGen {
 class $AssetsImageGen {
   const $AssetsImageGen();
 
+  /// File path: assets/image/gallery1.png
+  AssetGenImage get gallery1 =>
+      const AssetGenImage('assets/image/gallery1.png');
+
+  /// File path: assets/image/gallery2.png
+  AssetGenImage get gallery2 =>
+      const AssetGenImage('assets/image/gallery2.png');
+
+  /// File path: assets/image/gallery3.png
+  AssetGenImage get gallery3 =>
+      const AssetGenImage('assets/image/gallery3.png');
+
   /// File path: assets/image/photo.png
   AssetGenImage get photo => const AssetGenImage('assets/image/photo.png');
 
+  /// File path: assets/image/thumbnail1.png
+  AssetGenImage get thumbnail1 =>
+      const AssetGenImage('assets/image/thumbnail1.png');
+
+  /// File path: assets/image/thumbnail2.png
+  AssetGenImage get thumbnail2 =>
+      const AssetGenImage('assets/image/thumbnail2.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [photo];
+  List<AssetGenImage> get values =>
+      [gallery1, gallery2, gallery3, photo, thumbnail1, thumbnail2];
 }
 
 class Assets {

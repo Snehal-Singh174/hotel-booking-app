@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_booking_app/gen/colors.gen.dart';
+import 'package:hotel_booking_app/models/hotel_model.dart';
+import 'package:hotel_booking_app/providers/all_hotels_provider.dart';
 import 'package:hotel_booking_app/widgets/app_text.dart';
 import 'package:intl/intl.dart';
 
@@ -7,6 +9,7 @@ import '../gen/assets.gen.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_icon_button.dart';
 import '../widgets/custom_text_field.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -31,6 +34,10 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   _HeaderSection(),
                   _SearchCard(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _NearByHotels()
                 ],
               ),
             )
@@ -131,6 +138,65 @@ class _SearchCard extends StatelessWidget {
           const CustomButton(
             text: 'Search',
           )
+        ],
+      ),
+    );
+  }
+}
+
+class _NearByHotels extends ConsumerWidget {
+  const _NearByHotels({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final hotels = ref.watch(allHotelsProvider);
+    return Column(
+      children: [
+        hotels.when(
+            data: (hotels) {
+              return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: hotels.length,
+                  itemBuilder: (context, index) {
+                    return HotelCard(hotel: hotels[index]);
+                  });
+            },
+            error: (error, stackTrace) => Text('Error: $error'),
+            loading: () => const Center(child: CircularProgressIndicator()))
+      ],
+    );
+  }
+}
+
+class HotelCard extends StatelessWidget {
+  final HotelModel hotel;
+
+  const HotelCard({super.key, required this.hotel});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 10.0),
+      decoration: BoxDecoration(
+          color: ColorName.lightGrey.withAlpha(50),
+          borderRadius: BorderRadius.circular(20.0)),
+      child: Row(
+        children: [
+          Flexible(
+            flex: 1,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20.0)
+              ),
+              child: Image.asset(
+                hotel.thumbnailPath,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Flexible(
+              flex: 2,
+              child: Text(hotel.title)),
         ],
       ),
     );

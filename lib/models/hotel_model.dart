@@ -31,7 +31,7 @@ class HotelModel {
     HotelModel(
         id: '1',
         thumbnailPath: 'assets/image/thumbnail2.png',
-        title: 'Alana Hotel',
+        title: 'D Alana Hotel Yogya',
         location: 'Bantul Regency, Yogyakarta',
         address: 'Jl. Progratris 8.5 km, Yogyakarta 55186',
         description: 'We are only 10 minute drive from the water castle',
@@ -43,7 +43,7 @@ class HotelModel {
     HotelModel(
         id: '2',
         thumbnailPath: 'assets/image/thumbnail2.png',
-        title: 'Alana Hotel',
+        title: 'GreenHost Banquet Hotel',
         location: 'Bantul Regency, Yogyakarta',
         address: 'Jl. Progratris 8.5 km, Yogyakarta 55186',
         description: 'We are only 10 minute drive from the water castle',
@@ -55,7 +55,7 @@ class HotelModel {
     HotelModel(
         id: '3',
         thumbnailPath: 'assets/image/thumbnail2.png',
-        title: 'Alana Hotel',
+        title: 'Canali Tirta Hotel',
         location: 'Bantul Regency, Yogyakarta',
         address: 'Jl. Progratris 8.5 km, Yogyakarta 55186',
         description: 'We are only 10 minute drive from the water castle',
