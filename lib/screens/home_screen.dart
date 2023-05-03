@@ -186,8 +186,8 @@ class HotelCard extends StatelessWidget {
             flex: 1,
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20.0)
-              ),
+                  topLeft: Radius.circular(20.0),
+                  bottomLeft: Radius.circular(20.0)),
               child: Image.asset(
                 hotel.thumbnailPath,
                 fit: BoxFit.cover,
@@ -196,7 +196,30 @@ class HotelCard extends StatelessWidget {
           ),
           Flexible(
               flex: 2,
-              child: Text(hotel.title)),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppText.large(
+                      hotel.title,
+                      fontSize: 18,
+                      textAlign: TextAlign.left,
+                      maxLine: 2,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Assets.icon.location.image(scale: 8),
+                        const SizedBox(width: 5,),
+                        AppText.small(hotel.location)
+                      ],
+                    ),
+                  ],
+                ),
+              )),
         ],
       ),
     );
