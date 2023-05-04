@@ -38,7 +38,7 @@ class HotelModel {
         imagePaths: ['assets/image/gallery1.png', 'assets/image/gallery1.png', 'assets/image/gallery1.png'],
         price: 123,
         coordinate: LatLng(-7.81478719, 110.3692165),
-        ratingScore: 10
+        ratingScore: 4
     ),
     HotelModel(
         id: '2',
@@ -50,7 +50,7 @@ class HotelModel {
         imagePaths: ['assets/image/gallery1.png', 'assets/image/gallery1.png', 'assets/image/gallery1.png'],
         price: 123,
         coordinate: LatLng(-7.81478719, 110.3692165),
-        ratingScore: 10
+        ratingScore: 3
     ),
     HotelModel(
         id: '3',
