@@ -115,4 +115,46 @@ class AppTextSpan extends TextSpan {
               overflow: textOverflow,
               letterSpacing: letterSpacing),
         );
+
+  AppTextSpan.medium(String data,
+      {this.color = ColorName.primaryColor,
+      this.fontWeight = FontWeight.bold,
+      this.textAlign,
+      int? maxLine,
+      TextOverflow? textOverflow,
+      this.height,
+      this.letterSpacing,
+      this.fontSize = 14})
+      : super(
+          text: data,
+          style: TextStyle(
+              fontFamily: FontFamily.workSans,
+              fontSize: fontSize,
+              color: color,
+              height: height,
+              fontWeight: fontWeight,
+              overflow: textOverflow,
+              letterSpacing: letterSpacing),
+        );
+
+  AppTextSpan.small(String data,
+      {this.color = ColorName.primaryColor,
+      this.fontWeight = FontWeight.bold,
+      this.textAlign,
+      int? maxLine,
+      TextOverflow? textOverflow,
+      this.height,
+      this.letterSpacing,
+      this.fontSize = 12})
+      : super(
+          text: data,
+          style: TextStyle(
+              fontFamily: FontFamily.workSans,
+              fontSize: fontSize,
+              color: color,
+              height: height,
+              fontWeight: fontWeight,
+              overflow: textOverflow,
+              letterSpacing: letterSpacing),
+        );
 }

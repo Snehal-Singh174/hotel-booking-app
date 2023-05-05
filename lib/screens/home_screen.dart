@@ -8,8 +8,11 @@ import 'package:intl/intl.dart';
 import '../gen/assets.gen.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_icon_button.dart';
+import '../widgets/custom_rating.dart';
 import '../widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../widgets/hotel_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -30,15 +33,17 @@ class HomeScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                children: [
-                  _HeaderSection(),
-                  _SearchCard(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  _NearByHotels()
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _HeaderSection(),
+                    _SearchCard(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _NearByHotels()
+                  ],
+                ),
               ),
             )
           ],
@@ -152,10 +157,31 @@ class _NearByHotels extends ConsumerWidget {
     final hotels = ref.watch(allHotelsProvider);
     return Column(
       children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            Text(
+              'Nearby hotels',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+            Text(
+              'See all',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: ColorName.blue
+              ),
+            ),
+          ],
+        ),
         hotels.when(
             data: (hotels) {
               return ListView.builder(
                   shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: hotels.length,
                   itemBuilder: (context, index) {
                     return HotelCard(hotel: hotels[index]);
@@ -168,105 +194,3 @@ class _NearByHotels extends ConsumerWidget {
   }
 }
 
-class HotelCard extends StatelessWidget {
-  final HotelModel hotel;
-
-  const HotelCard({super.key, required this.hotel});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 10.0),
-      decoration: BoxDecoration(
-          color: ColorName.lightGrey.withAlpha(50),
-          borderRadius: BorderRadius.circular(20.0)),
-      child: Row(
-        children: [
-          Flexible(
-            flex: 1,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  bottomLeft: Radius.circular(20.0)),
-              child: Image.asset(
-                hotel.thumbnailPath,
-                fit: BoxFit.cover,
-                height: 150,
-              ),
-            ),
-          ),
-          Flexible(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText.large(
-                      hotel.title,
-                      fontSize: 18,
-                      textAlign: TextAlign.left,
-                      maxLine: 2,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Assets.icon.location.image(scale: 8),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        AppText.small(hotel.location)
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    CustomRating(
-                      ratingScore: hotel.ratingScore,
-                    ),
-                  ],
-                ),
-              )),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomRating extends StatelessWidget {
-  final double ratingScore;
-  final int totalReviews;
-  final bool showReviews;
-
-  const CustomRating(
-      {required this.ratingScore,
-      this.totalReviews = 0,
-      this.showReviews = false,
-      Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    const size = 15.0;
-    return Row(
-      children: [
-        for (int i = 1; i <= 5; i++)
-          Container(
-            margin: const EdgeInsets.all(1.0),
-            height: size,
-            width: size,
-            decoration: BoxDecoration(
-              color: i <= ratingScore ? ColorName.yellow : Colors.white,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: ColorName.yellow,
-                width: 2,
-              ),
-            ),
-          ),
-      ],
-    );
-  }
-}
