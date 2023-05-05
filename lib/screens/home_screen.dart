@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import '../gen/assets.gen.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_icon_button.dart';
+import '../widgets/custom_nav_bar.dart';
 import '../widgets/custom_rating.dart';
 import '../widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.blue,
+      bottomNavigationBar: const CustomNavBar(index: 0),
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -35,10 +37,10 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
+                  children: const [
                     _HeaderSection(),
                     _SearchCard(),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
                     _NearByHotels()
@@ -181,7 +183,7 @@ class _NearByHotels extends ConsumerWidget {
             data: (hotels) {
               return ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: hotels.length,
                   itemBuilder: (context, index) {
                     return HotelCard(hotel: hotels[index]);
